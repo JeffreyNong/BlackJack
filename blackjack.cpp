@@ -38,54 +38,54 @@ int main(){
         do {
             cout << "Dealer Hand" << endl;
             cout << "**" << endl;
-            PrintCard(iaHouseHand[1]);
-            cout << endl;
+            PrintCard(iaHouseHand[1]); //print dealer hand
+            cout << endl;             //print player hand
             cout << "Player Hand: Score = " << ScoreHand(iaPlayerHand, iPlayerCardCount) << endl;
             PrintHand (iaPlayerHand, iPlayerCardCount);
-
+            //ask player hit or stand
             cout << "hit(h) or stay(s): ";
             cin >> cPlayerChoice;
-            if (cPlayerChoice == 'h'){
+            if (cPlayerChoice == 'h'){ //if player hits
                 iaPlayerHand[iPlayerCardCount] = GetNextCard(baCardsDealt);
                 ++iPlayerCardCount;
             }
-            else if (cPlayerChoice == 's'){
+            else if (cPlayerChoice == 's'){ //if player stays
                 bPlayerHits = false;
             }
-            else (
+            else ( // players does not select h or s
                 cout << "Error: Try Again" << endl;
             )
             cout << endl;
             iPlayerScore = ScoreHand(iaPlayerHand, iPlayerCardCount);
-        }while (bPlayerHits && iPlayerScore < 22);
+        }while (bPlayerHits && iPlayerScore < 22); //keep asking to hit or stay if under 22 when hitting
         
         if (iPlayerScore > 21 ){
-            cout << "Dealer Wins" << endl; 
+            cout << "Dealer Wins" << endl; //calc if dealer wins
             PrintScoresAndHands(iaHouseHand, iHouseCardCount, iaPlayerHand, iPlayerCardCount);
         }
         else {
             int iHouseScore = ScoreHand(iaHouseHand, iHouseCardCount);
-            while (iHouseScore < 17 ){
+            while (iHouseScore < 17 ){ //if dealer hits 17 stay
                 iaHouseHand(iHouseCardCount) = GetNextCard(baCardsDealt);
                 ++iHouseCardCount;
                 iHouseScore = ScoreHand(iaHouseHand,iHouseCardCount);
             }
-            bool bHoustBusts = (iHouseScore > 21);
+            bool bHoustBusts = (iHouseScore > 21); //if dealer busts
             if (bHoustBusts){
                 cout << "You Win " << endl;
                 PrintScoresAndHands(iaHouseHand, iHouseCardCount, iaPlayerHand, iPlayerCardCount);
             }
             else {
-                if (iPlayerScore == iHouseScore){
+                if (iPlayerScore == iHouseScore){ //if they tie
                     cout << "Push" << endl;
                     PrintScoresAndHands(iaHouseHand, iHouseCardCount, iaPlayerHand, iPlayerCardCount);
                 }
-                else (iPlayerScore > iHouseScore){
+                else (iPlayerScore > iHouseScore){//if player wins
                     cout << "You Win" << endl;
                     PrintScoresAndHands(iaHouseHand, iHouseCardCount, iaPlayerHand, iPlayerCardCount);
                 }
                 else {
-                    cout << "Dealer Wins" << endl;
+                    cout << "Dealer Wins" << endl;// if dealer wins
                     PrintScoresAndHands(iaHouseHand, iHouseCardCount, iaPlayerHand, iPlayerCardCount);
                 }
             }
